@@ -1,0 +1,10 @@
+A faire :
+Github/Gitlab
+S'informer sur l'interface graphique
+
+
+Semaine 2 :
+Nous commencons le projet comme prevu avec la creation de la classe Vecteurs, et decidons de separer les fichiers des le depart, a l'aide d'un Makefile concu a cet effet. A contribution egale (nous travaillons cote a cote pour commencer, la separation des taches viendra plus tard), nous concevons l'attribut et les methodes necessaires a notre classe. Quelques problemes techniques, et les tests sont encore en cours.
+
+Semaine 3 :
+Le choix de separer les fichiers des la premiere semaine nous a permis de nous concentrer sur les tests et de reviser les exceptions; la notion n'etant (a nos yeux) pas des plus intuitives, ce surplus de temps nous fut d'une grande aide.
