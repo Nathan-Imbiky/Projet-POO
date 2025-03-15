@@ -6,7 +6,7 @@ using namespace std;
 
 int main()
 {
-
+	/*
 	Vecteur v;
 	
 	v.augmente(4);
@@ -189,6 +189,7 @@ int main()
 		cout<<err.what()<<endl;
 	}
 	l4.affiche();
+	*/
 	
 	
 	
