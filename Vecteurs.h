@@ -32,12 +32,12 @@ class Vecteur
 	Vecteur& operator+=(Vecteur const& autre); //additionne au notre le vecteur autre
 	Vecteur& operator-=(Vecteur const& autre); //soustrait au notre le vecteur autre
 	
-	Vecteur& operator*=(double const& a);
-	Vecteur& operator/=(double const& a);
+	Vecteur& operator*=(double const& a); //multiplication interne par un scalaire
+	Vecteur& operator/=(double const& a); //division interne par un scalaire
 };
 
 
-//operateurs internes :
+//operateurs externes :
 std::ostream& operator<<(std::ostream& out, Vecteur const& v); //affiche v (cout<<v)
 
 Vecteur operator^(Vecteur v1, Vecteur const& v2); //retourne le produit vectoriel de v1 avec v2 (v1^v2); en cas de probleme, retourne le vecteur 3d nul avec un warning

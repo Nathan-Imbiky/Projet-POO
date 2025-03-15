@@ -1,0 +1,105 @@
+	[Question P1.1] Comment representez-vous ces vecteurs ? Comment sont-ils organises : quels attributs ? quelles methodes ? quels droits d'acces ?
+
+Les vecteurs seront representes par une classe "Vecteurs".
+	
+Nous avons juge que notre classe avait besoin d'un seul attribut, le vector/tableau dynamique de doubles "coords" (pour "coordonnees").
+En effet, une fois la base de l'espace choisie (base canonique en ce cas- plus pratique, plus naturel), 
+un vecteur ne saurait-ˆtre represente autrement que par ses coordonn‚es uniques. coords est bien sur un attribut prive.
+	
+Les methodes quant-a elles ne d‚vient pas de la consigne a ce jour, except‚ "get_coords()", methode retournant une copie
+de l'attribut coords, que l'on a jug‚e utile d'ajouter afin de pouvoir effectuer des operations (nous en avons eu besoin
+lors de la conception de l'addition vectorielle par exemple).
+	
+Nous ajouterons plus tard des methodes additionnelles si besoin est. Celles que nous avons pour l'instant sont toutes publiques sauf une,
+car aucune d'entre elles ne constitue une tƒche qui devrait toujours etre execut‚e purement "en interne" : dans le cadre d'un modele 
+mecanique, il sera par exemple naturel de vouloir avoir acces a la norme ou l'oppos‚ d'un vecteur par exemple, ou de vouloir pouvoir les
+afficher ou les comparer.
+La seule exception … cela est la methode "norme2()", qui constitue une sorte d' "etape intermediaire" superflue. Pour obtenir le carre de 
+la norme depuis une approche utilisateur, on pourra simplement obtenir la norme puis la mettre au carre.
+	
+	
+	Ci-dessous la liste des methodes (operations incluses) :
+	
+double norme2() const :				calcule le carre de la norme du vecteur
+std::vector<double> get_coords() const:			Retourne les coordonn‚es du vecteur
+void augmente(double x=0):				augmente la dimension du vecteur et ajoute une valeur dans la "case" ajoutee (valeur 0 par defaut par precaution)
+void set_coord(std::size_t i, double x):			permet de modifier une coordonnee du vecteur (on entre la valeur x e l'indice i)
+void affiche() const:			affiche  le Vecteur dans le terminal
+bool compare(Vecteur v) const:			determine si le Vecteur en argument est egal au notre
+	
+	
+operations :
+Vecteur addition(Vecteur autre) const:			addition de vecteurs; si les dimensions ne sont pas egales, on ajoute 0 dans toutes les cases finales du vecteur le plus grand 
+Vecteur oppose() const:			retourne le vecteur oppose
+Vecteur unitaire() const:			retourne le vecteur unitaire colin‚aire et de meme sens
+Vecteur mult(double x) const:			 multiplication par un scalaire
+double prod_scal(Vecteur autre) const:			produit scalaire de vecteurs; si les dimensions ne sont pas egales on lance une exception 
+Vecteur prod_vect(Vecteur autre) const:			 produit vectoriel (defini uniquement pour la dimension 3; autrement on lance une exception)
+double norme() const:			calcule la norme
+
+	
+	
+	[Question P1.2] Quel choix avez vous fait pour les op‚rations entre vecteurs de dimensions diff‚rentes ?
+	
+Pour les produits vectoriels et scalaires, nous avons choisi de lancer une exception avec la m‚thode en cas de dimensions inadapt‚es.
+Ces deux produits partageant des propri‚t‚s intimes avec l'espace dans lequel ils ont lieu (un produit scalaire d'un vecteur de R2 avec
+un autre vecteur de R3 est-un non sens), il nous a sembl‚ ad‚quat de ne pas se satisfaire d'une "solution par d‚faut".
+
+Pour l'addition vectorielle, nous avons choisi d'‚tendre la taille du vecteur le plus petit en lui rajoutant des dimensions dans lesquelles
+sa coordonn‚e est nulle, puis de l'ajouter au second vecteur. Additionner deux vecteurs de dimensions diff‚rentes reste un non sens; cela dit,
+on peut plus facilement s'imaginer une extension naturelle de ce type d'op‚rations.
+	
+
+
+	[Question P4.1] Avez-vous ajout‚ un constructeur de copie ? Pourquoi (justifiez votre choix) ?
+Nous n'avons pas ajout‚ de constructeur de copie, et ce car nos attributs et m‚thodes ne contiennent aucun pointeur; le constructeur de copie par d‚faut suffit donc amplement. De mˆme, l'op‚rateur d'affectation n'a pas ‚t‚ modifi‚.
+
+
+
+	[Question P4.2] Si l'on souhaitait ajouter un constructeur par coordonnees spheriques (deux angles et une longueur) pour les vecteurs de dimension 3,
+
+	a] que cela impliquerait-il au niveau des attributs de la classe ?
+Nous devrions pouvoir representer les coordonnees coords de deux manieres differentes, cartesienne comme ici, et spheriques.
+	
+	b] quelle serait la difficulte majeure (voire l'impossibilite) de sa realisation en C++ ? (C'est d'ailleurs pour cela qu'on ne vous demande pas de faire un tel constructeur !)
+Un tel constructeur aurait également besoin de 3 doubles, et il nous faudrait donc un moyen de le differencier ou de le fusionner avec le constructeur en cartesien (un bool dedie par exemple); nous aurions aussi besoin d'une maniere de convertir les coords cartesienens en spherique, ce qui ajouterait encore plus de desordre au programme. Finalement, et surtout, la representation spherique n'a de sens qu'en 3d. Notre classe de Vecteurs pouvant adopter n'importe quelle dimension, il est bien meilleur de garder la representation actuelle.
+
+
+
+	[Question P4.3] Quels op‚rateurs avez vous introduits ?
+Nous avons introduit les operateurs :
+-d'affichage, comme demande (externe)
+-de multiplication et division internes par un scalaire, ainsi que leurs variantes externes (deux, une pour chaque cote)
+-de comparaison, d'egalite et de non egalite, passes en interne
+-d'addition et de soustraction avec un vecteur, les versions externes construites a partir des versions internes
+-l'operateur externe qui retourne l'oppose, et l'operateur externe unaire 
+-les operateurs des produits scalaire et vectoriel, tous deux externes
+
+Ci-dessous une copie des prototype des operateurs et des commentaires les introduisant :
+
+operateurs internes :
+bool operator==(Vecteur const& autre); //determine si notre vecteur est egal a "autre", remplace la fonction compare()
+bool operator!=(Vecteur const& autre); //simplement "non v==autre", ou v est notre vecteur
+	
+Vecteur& operator+=(Vecteur const& autre); //additionne au notre le vecteur autre
+Vecteur& operator-=(Vecteur const& autre); //soustrait au notre le vecteur autre
+	
+Vecteur& operator*=(double const& a); //multiplication interne par un scalaire
+Vecteur& operator/=(double const& a); //division interne par un scalaire
+
+
+operateurs externes :
+std::ostream& operator<<(std::ostream& out, Vecteur const& v); //affiche v (cout<<v)
+
+Vecteur operator^(Vecteur v1, Vecteur const& v2); //retourne le produit vectoriel de v1 avec v2 (v1^v2); en cas de probleme, retourne le vecteur 3d nul avec un warning
+double operator*(Vecteur const&v1, Vecteur const& v2); //effectue le produit scalaire de v1 et v2; en cas de probleme, retourne 0 avec un warning
+Vecteur operator-(Vecteur v); //retourne -v l'oppose de v
+Vecteur operator~(Vecteur const& v); //retourne le vecteur unitaire dans le sens et la direction de v
+
+Vecteur operator*(Vecteur v, double const& a); 
+Vecteur operator*(double const& a, Vecteur v); //multiplication scalaire des deux cotes
+Vecteur operator/(Vecteur v, double const& a);
+Vecteur operator/(double const& a, Vecteur v); //division scalaire des deux cotes
+
+Vecteur operator+(Vecteur v1, Vecteur const& v2); // addition de vecteurs
+Vecteur operator-(Vecteur v1, Vecteur const& v2); // soustraction de vecteurs
