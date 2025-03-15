@@ -372,7 +372,7 @@ Vecteur operator-(Vecteur v)
 	return v;
 }
 
-Vecteur operator~(Vecteur v)
+Vecteur operator~(Vecteur const& v)
 {
 	size_t n(0);
 	
@@ -397,9 +397,9 @@ Vecteur operator~(Vecteur v)
 
 Vecteur& Vecteur::operator*=(double const& a)
 {
-	for(auto element : coords)
+	for(size_t i(0); i<coords.size(); ++i)
 	{
-		element *=a;
+			coords[i] *=a;
 	}
 	return *this;
 }
@@ -426,9 +426,9 @@ Vecteur& Vecteur::operator/=(double const& a)
 		return *this;
 	}
 	
-	for(auto element : coords)
+	for(size_t i(0); i<coords.size(); ++i)
 	{
-		element /=a;
+		coords[i] /=a;
 	}
 	return *this;
 }

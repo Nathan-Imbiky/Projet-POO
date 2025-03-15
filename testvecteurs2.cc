@@ -31,6 +31,8 @@ int main()
 	else cout<<"v1!=v3"<<endl;
 	cout<<endl;
 	
+	Vecteur v6(5, 0, -7);
+	
 	v3+=v1;
 	Vecteur v7(v5+v4);
 	Vecteur v8(v2+v3);
@@ -63,7 +65,7 @@ int main()
 	Vecteur e4(~v4);
 	Vecteur e2(~v2);
 	Vecteur e1(~v1);
-	Vecteur e5({45, -89, 4614, -7988, 0, 7});
+	Vecteur e5({45, -89, 4614, -7988, 0, 7, 2});
 	e5 = ~e5;
 	
 	cout<<"Unitaires : "<<e1<<", "<<e2<<", "<<e4<<", "<<e5<<endl;
@@ -71,6 +73,23 @@ int main()
 	
 	
 	
+	double x1(v1*v2);
+	double x2(v4*v5);
+	double x3(v3*v4);
+	double x4(v3*e5);
+	
+	cout<<"Produits scalaires :"<<x1<<" "<<x2<<" "<<x3<<" "<<x4<<endl;
+	cout<<endl;
+	
+	Vecteur v17(0, 1, 30);
+	
+	Vecteur v18(v17^v6);
+	Vecteur v19(v18^v17);
+	Vecteur v20(v17^v18);
+	Vecteur v21(v20^v20);
+	Vecteur v22(v2^v20);
+	
+	cout<<"Produits vectoriels : "<<v18<<", "<<v19<<", "<<v20<<", "<<v21<<", "<<v22<<endl;
 	
 	return 0;
 }
