@@ -3,6 +3,7 @@
 #include <iostream>
 #include <vector>
 #include <cmath>
+#include <list>
 using namespace std;
 
 
@@ -66,7 +67,6 @@ bool Vecteur::compare(Vecteur v) const
 
 Vecteur Vecteur::addition(Vecteur autre) const
 {
-	Vecteur v;
 	size_t m(coords.size());
 	
 	if(coords.size()<autre.get_coords().size())
@@ -74,10 +74,8 @@ Vecteur Vecteur::addition(Vecteur autre) const
 		m = autre.get_coords().size();
 	}
 	
-	for(size_t i(0); i<m; ++i)
-	{
-		v.augmente(0);
-	}
+	Vecteur v(m);
+	
 	
 	for(size_t i(0); i<coords.size(); ++i)
 	{
@@ -95,7 +93,7 @@ Vecteur Vecteur::addition(Vecteur autre) const
 
 Vecteur Vecteur::oppose() const
 {
-	Vecteur v;
+	Vecteur v(0);
 	
 	for (auto element : coords)
 	{
@@ -107,7 +105,7 @@ Vecteur Vecteur::oppose() const
 
 Vecteur Vecteur::unitaire() const
 {
-	Vecteur v;
+	Vecteur v(0);
 	size_t n(0);
 	
 	for (auto element : coords)
@@ -141,7 +139,7 @@ Vecteur Vecteur::unitaire() const
 
 Vecteur Vecteur::mult(double x) const
 {
-	Vecteur v;
+	Vecteur v(0);
 	
 	for (auto element : coords)
 	{
@@ -180,7 +178,7 @@ double Vecteur::prod_scal(Vecteur autre) const
 	
 	if(coords.size() != autre.get_coords().size())
 	{
-		throw out_of_range("p_scalaire probleme de dimension;");
+		throw out_of_range("p_scalaire probleme de dimension; ");
 	}
 	
 	for(size_t i(0); i<coords.size(); ++i)
@@ -195,13 +193,13 @@ double Vecteur::prod_scal(Vecteur autre) const
 
 Vecteur Vecteur::prod_vect(Vecteur autre) const
 {
-	Vecteur v;
+	Vecteur v(0);
 
 	
 	
 	if( not( coords.size()==autre.get_coords().size() && coords.size()==3) )
 	{
-		throw out_of_range("p_vectoriel probleme de dimension;");
+		throw out_of_range("p_vectoriel probleme de dimension; ");
 	}
 	
 	double x1(coords[1]*autre.get_coords()[2] - coords[2]*autre.get_coords()[1]);
@@ -217,7 +215,252 @@ Vecteur Vecteur::prod_vect(Vecteur autre) const
 }
 //------
 
+Vecteur::Vecteur(unsigned int n)
+{
+	for(unsigned int i(0); i<n; ++i)
+	{
+			augmente(0);
+	}
+}
+	
+	
+Vecteur::Vecteur(list<double> L)
+{
+	for (double element : L)
+	{
+		augmente(element);
+	}
+}
+
+Vecteur::Vecteur(double x, double y, double z) 
+{
+	augmente(x);
+	augmente(y);
+	augmente(z);
+}
+
+//-----
+
+
+bool Vecteur::operator==(Vecteur const& autre)
+{
+	if(coords.size() != autre.coords.size())
+	{
+		return false;
+	}
+	else
+	{
+		bool b(true);
+		
+		for(size_t i(0); i<coords.size(); ++i)
+		{
+			if(coords[i] != autre.coords[i])
+			{
+				b = false;
+			}
+		}
+		return b;
+	}
+}
+
+
+bool Vecteur::operator!=(Vecteur const& autre)
+{
+	if(*this==autre) return false;
+	else return true;
+}
+	
+Vecteur& Vecteur::operator+=(Vecteur const& autre)
+{
+	size_t m(coords.size());
+	
+	if(coords.size()!=autre.get_coords().size())
+	{
+		cout<<"Attention; deux vecteurs de tailles diff‚rentes ont ‚t‚ additionn‚s, la taille du vecteur c“t‚ gauche de l'affectation sera peut-ˆtre modifi‚e"<<endl;
+		cout<<endl;
+	}
+	
+	if(coords.size()<autre.get_coords().size())
+	{
+		m = autre.get_coords().size();
+	}
+	
+	Vecteur v(m); //on cr‚e un vecteur auxiliaire v de taille max{taille de *this, taille de autre}, puis on lui ajoute les coordonnees des deux autres vecteurs
+	
+	
+	for(size_t i(0); i<coords.size(); ++i)
+	{
+		v.set_coord(i, coords[i]);
+	}
+	
+	for(size_t i(0); i<autre.get_coords().size(); ++i)
+	{
+		v.set_coord(i, v.get_coords()[i] + autre.get_coords()[i]);
+	}
+	
+	*this = v;
+	
+	return *this;
+}
+
+Vecteur& Vecteur::operator-=(Vecteur const& autre)
+{
+	*this+= -autre;
+	return *this;
+}
+
+
+double operator*(Vecteur const&v1, Vecteur const& v2)
+{
+	double x;
+	try
+	{
+	x = v1.prod_scal(v2);	
+	}
+	catch(out_of_range const& err)
+	{
+		cout<<err.what()<<"la valeur 0 sera retourn‚e"<<endl;
+		x = 0;
+	}
+	
+	return x;
+}
+
+Vecteur operator^(Vecteur v1, Vecteur const& v2)
+{
+	try
+	{
+	v1 = v1.prod_vect(v2);	
+	}
+	catch(out_of_range const& err)
+	{
+		cout<<err.what()<<"le vecteur nul sera retourn‚"<<endl;
+		v1 = {0, 0, 0};
+	}
+	
+	return v1;
+
+}
 
 
 
+ostream& operator<<(ostream& out, Vecteur const& v)
+{
+	vector<double> u = v.get_coords(); //u est un placeholder pour l'attribut priv‚ "v.coords"
+	
+	if(u.size()==0) 
+	{
+		out<<"Ce vecteur est vide";
+		return out;
+	}
+	else
+	{
+		out<<"( ";
+		for(size_t i(0) ; i<u.size()-1 ; ++i) //u.size()-1 pour ‚viter une virgule en trop … la fin
+		{
+			out<<u[i]<<", ";
+		}
+		out<<u[u.size()-1]<<" )";
+		return out;
+	}
+} 
 
+
+
+Vecteur operator-(Vecteur v) 
+{
+	
+	for (size_t i(0); i<v.get_coords().size(); ++i)
+	{
+		v.set_coord(i, -v.get_coords()[i]);
+	}
+	
+	return v;
+}
+
+Vecteur operator~(Vecteur v)
+{
+	size_t n(0);
+	
+	for (auto element : v.get_coords())
+	{
+		if(element==0)
+		{
+			++n;
+		}
+	}
+	
+	if(n==v.get_coords().size()) //ce "n" sert … v‚rifier si toutes les composantes du vecteur sont nulles (auquel cas le vecteur nul de mˆme dimension sera retourn‚)
+	{
+		
+		return v;
+	}
+	else
+	{
+		return v/v.norme();
+	}
+}
+
+Vecteur& Vecteur::operator*=(double const& a)
+{
+	for(auto element : coords)
+	{
+		element *=a;
+	}
+	return *this;
+}
+
+
+
+Vecteur operator*(Vecteur v, double const& a)
+{
+	v*=a;
+	return v;
+}
+
+Vecteur operator*(double const& a, Vecteur v)
+{
+	v*=a;
+	return v;
+}
+
+Vecteur& Vecteur::operator/=(double const& a)
+{
+	if(a==0)
+	{
+		cout<<"division par 0 impossible, vecteur non modifi‚"<<endl;
+		return *this;
+	}
+	
+	for(auto element : coords)
+	{
+		element /=a;
+	}
+	return *this;
+}
+
+Vecteur operator/(double const& a, Vecteur v)
+{
+	v/=a;
+	return v;
+}
+
+Vecteur operator/(Vecteur v, double const& a)
+{
+	v/=a;
+	return v;
+}
+
+
+
+Vecteur operator+(Vecteur v1, Vecteur const& v2)
+{
+	v1+=v2;
+	return v1;
+}
+
+Vecteur operator-(Vecteur v1, Vecteur const& v2)
+{
+	v1-=v2;
+	return v1;
+}
