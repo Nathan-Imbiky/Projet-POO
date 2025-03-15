@@ -36,6 +36,7 @@ int main()
 	v3+=v1;
 	Vecteur v7(v5+v4);
 	Vecteur v8(v2+v3);
+	Vecteur v8_2(v3 + v2);
 	Vecteur v9(-v2);
 	Vecteur v10(v3-v2);
 	Vecteur v11(v3 + v9);
@@ -44,6 +45,7 @@ int main()
 	cout<<"v3+v1 = "<<v3<<endl;
 	cout<<"v5+v4 = "<<v7<<endl;
 	cout<<"v2+v3 = "<<v8<<endl;
+	cout<<"v3+v2 = "<<v8_2<<endl;
 	cout<<"-v2 = "<<v9<<endl;
 	cout<<"v3-v2 = "<<v10<<endl;
 	cout<<"v3-v2 = "<<v11<<endl;
