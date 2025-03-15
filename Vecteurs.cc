@@ -274,12 +274,6 @@ Vecteur& Vecteur::operator+=(Vecteur const& autre)
 {
 	size_t m(coords.size());
 	
-	if(coords.size()!=autre.get_coords().size())
-	{
-		cout<<"Attention; deux vecteurs de tailles diff‚rentes ont ‚t‚ additionn‚s, la taille du vecteur c“t‚ gauche de l'affectation sera peut-ˆtre modifi‚e"<<endl;
-		cout<<endl;
-	}
-	
 	if(coords.size()<autre.get_coords().size())
 	{
 		m = autre.get_coords().size();
