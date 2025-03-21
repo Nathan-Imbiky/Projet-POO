@@ -16,7 +16,7 @@ void Vecteur::set_coord(size_t i, double x)
 {
 	if(i>=coords.size())
 	{
-		cout<<"L'indice indiqu‚ n'est pas conforme … la dimension"<<endl;
+		cout<<"L'indice indique n'est pas conforme a la dimension"<<endl;
 	}
 	else
 	{
@@ -154,7 +154,7 @@ Vecteur& Vecteur::operator+=(Vecteur const& autre)
 		m = autre.get_coords().size();
 	}
 	
-	Vecteur v(m); //on cr‚e un vecteur auxiliaire v de taille max{taille de *this, taille de autre}, puis on lui ajoute les coordonnees des deux autres vecteurs
+	Vecteur v(m); //on cree un vecteur auxiliaire v de taille max{taille de *this, taille de autre}, puis on lui ajoute les coordonnees des deux autres vecteurs
 	
 	
 	for(size_t i(0); i<coords.size(); ++i)
@@ -188,7 +188,7 @@ double operator*(Vecteur const&v1, Vecteur const& v2)
 	}
 	catch(out_of_range const& err)
 	{
-		cout<<err.what()<<"la valeur 0 sera retourn‚e"<<endl;
+		cout<<err.what()<<"la valeur 0 sera retournee"<<endl;
 		x = 0;
 	}
 	
@@ -203,7 +203,7 @@ Vecteur operator^(Vecteur v1, Vecteur const& v2)
 	}
 	catch(out_of_range const& err)
 	{
-		cout<<err.what()<<"le vecteur nul sera retourn‚"<<endl;
+		cout<<err.what()<<"le vecteur nul sera retourne"<<endl;
 		v1 = {0, 0, 0};
 	}
 	
@@ -215,7 +215,7 @@ Vecteur operator^(Vecteur v1, Vecteur const& v2)
 
 ostream& operator<<(ostream& out, Vecteur const& v)
 {
-	vector<double> u = v.get_coords(); //u est un placeholder pour l'attribut priv‚ "v.coords"
+	vector<double> u = v.get_coords(); //u est un placeholder pour l'attribut prive "v.coords"
 	
 	if(u.size()==0) 
 	{
@@ -225,7 +225,7 @@ ostream& operator<<(ostream& out, Vecteur const& v)
 	else
 	{
 		out<<"( ";
-		for(size_t i(0) ; i<u.size()-1 ; ++i) //u.size()-1 pour ‚viter une virgule en trop … la fin
+		for(size_t i(0) ; i<u.size()-1 ; ++i) //u.size()-1 pour eviter une virgule en trop a la fin
 		{
 			out<<u[i]<<", ";
 		}
@@ -259,7 +259,7 @@ Vecteur operator~(Vecteur const& v)
 		}
 	}
 	
-	if(n==v.get_coords().size()) //ce "n" sert … v‚rifier si toutes les composantes du vecteur sont nulles (auquel cas le vecteur nul de mˆme dimension sera retourn‚)
+	if(n==v.get_coords().size()) //ce "n" sert a verifier si toutes les composantes du vecteur sont nulles (auquel cas le vecteur nul de meme dimension sera retourne)
 	{
 		
 		return v;
@@ -297,7 +297,7 @@ Vecteur& Vecteur::operator/=(double const& a)
 {
 	if(a==0)
 	{
-		cout<<"division par 0 impossible, vecteur non modifi‚"<<endl;
+		cout<<"division par 0 impossible, vecteur non modifie"<<endl;
 		return *this;
 	}
 	

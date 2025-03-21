@@ -2,7 +2,7 @@ all: testVecteurs testvecteurs2
 
 CXX = g++
 CC = $(CXX)
-CXXFLAGS = -std=c++11 -pedantic -Wall
+CXXFLAGS = -std=c++17 -pedantic -Wall
 
 
 testvecteurs2: Vecteurs.o testvecteurs2.o

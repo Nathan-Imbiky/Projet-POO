@@ -40,10 +40,11 @@ class Vecteur
 //operateurs externes :
 std::ostream& operator<<(std::ostream& out, Vecteur const& v); //affiche v (cout<<v)
 
-Vecteur operator^(Vecteur v1, Vecteur const& v2); //retourne le produit vectoriel de v1 avec v2 (v1^v2); en cas de probleme, retourne le vecteur 3d nul avec un warning
-double operator*(Vecteur const&v1, Vecteur const& v2); //effectue le produit scalaire de v1 et v2; en cas de probleme, retourne 0 avec un warning
+
+double operator*(Vecteur const&v1, Vecteur const& v2); //effectue le produit scalaire de v1 et v2; elle utilisera la methode prod_scal, que j'ai decide de garder, et va catch son exception puis retourner 0 en cas de probleme
+Vecteur operator^(Vecteur v1, Vecteur const& v2); //retourne le produit vectoriel de v1 avec v2 (v1^v2); elle utilisera elle aussi la methode prod_vect correspondante, et retournera le vecteur 3d nul en cas d'exception
 Vecteur operator-(Vecteur v); //retourne -v l'oppose de v
-Vecteur operator~(Vecteur const& v); //retourne le vecteur unitaire dans le sens et la direction de v
+Vecteur operator(Vecteur const& v); //retourne le vecteur unitaire dans le sens et la direction de v
 
 Vecteur operator*(Vecteur v, double const& a); 
 Vecteur operator*(double const& a, Vecteur v); //multiplication scalaire des deux cotes

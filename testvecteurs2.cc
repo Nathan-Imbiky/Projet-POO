@@ -19,7 +19,7 @@ int main()
 	v4.set_coord(6, 1);
 	
 	
-	cout<<"Comparaisons :"<<endl;
+	cout<<"Comparaisons :"<<endl; //test des opérateurs de comparaison
 	
 	if(v1==v4) cout<<"v1==v4"<<endl;
 	else cout<<"v1!=v4"<<endl;
@@ -41,7 +41,7 @@ int main()
 	Vecteur v10(v3-v2);
 	Vecteur v11(v3 + v9);
 	
-	cout<<"Additions :"<<endl;
+	cout<<"Additions :"<<endl; //test des additions et soustractions sous leurs différentes formes, test de l'opposé
 	cout<<"v3+v1 = "<<v3<<endl;
 	cout<<"v5+v4 = "<<v7<<endl;
 	cout<<"v2+v3 = "<<v8<<endl;
@@ -61,7 +61,7 @@ int main()
 	Vecteur v15(v2/1.5);
 	Vecteur v16(v2/0);
 	
-	cout<<"Mult. scalaires : "<<v3<<","<<v12<<", "<<v13<<", "<<v14<<", "<<v15<<", "<<v16<<endl;
+	cout<<"Mult. scalaires : "<<v3<<","<<v12<<", "<<v13<<", "<<v14<<", "<<v15<<", "<<v16<<endl; // test des multiplications et divisions par un scalaire;
 	cout<<endl;
 	
 	Vecteur e4(~v4);
@@ -70,7 +70,7 @@ int main()
 	Vecteur e5({45, -89, 4614, -7988, 0, 7, 2});
 	e5 = ~e5;
 	
-	cout<<"Unitaires : "<<e1<<", "<<e2<<", "<<e4<<", "<<e5<<endl;
+	cout<<"Unitaires : "<<e1<<", "<<e2<<", "<<e4<<", "<<e5<<endl; //test de l'opérateur unaire
 	cout<<endl;
 	
 	
@@ -80,7 +80,7 @@ int main()
 	double x3(v3*v4);
 	double x4(v3*e5);
 	
-	cout<<"Produits scalaires :"<<x1<<" "<<x2<<" "<<x3<<" "<<x4<<endl;
+	cout<<"Produits scalaires :"<<x1<<" "<<x2<<" "<<x3<<" "<<x4<<endl; //test des produits scalaires
 	cout<<endl;
 	
 	Vecteur v17(0, 1, 30);
@@ -91,7 +91,7 @@ int main()
 	Vecteur v21(v20^v20);
 	Vecteur v22(v2^v20);
 	
-	cout<<"Produits vectoriels : "<<v18<<", "<<v19<<", "<<v20<<", "<<v21<<", "<<v22<<endl;
+	cout<<"Produits vectoriels : "<<v18<<", "<<v19<<", "<<v20<<", "<<v21<<", "<<v22<<endl; //test des produits vectoriels
 	
 	return 0;
 }
