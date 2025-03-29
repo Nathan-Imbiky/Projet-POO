@@ -7,16 +7,16 @@ void IntegrateurEulerCromer::integre(ObjetMobile& O, double t, double dt, double
 {
 	if(ordre==2)
 	{
-		Vecteur p(O.getparametres());
-		Vecteur d(O.getderivee());
+		Vecteur p(O.get_etat());
+		Vecteur d(O.get_derivee());
 	
-		O.setderiveetout(d + dt*O.evolution(t));
-		O.setparametres(p + dt*O.getderivee());
+		O.set_derivee(d + dt*O.evolution(t));
+		O.set_etat(p + dt*O.get_derivee());
 	}
 	if(ordre==1)
 	{
-		Vecteur p(O.getparametres());
-		O.setparametres(p + dt*O.evolution(t));
+		Vecteur p(O.get_etat());
+		O.set_etat(p + dt*O.evolution(t));
 	}
 }
 

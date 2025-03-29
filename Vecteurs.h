@@ -15,6 +15,7 @@ class Vecteur
 	void set_coord(std::size_t i, double x); //permet de modifier une coordonnae du vecteur (on entre la valeur x a l'indice i)
 	
 	double norme() const; // calcule la norme
+	size_t size() const; // retourne la taille de coords
 	
 	//produits :
 	double prod_scal(Vecteur autre) const; // produit scalaire de vecteurs; si les dimensions ne sont pas egales on lance une exception 

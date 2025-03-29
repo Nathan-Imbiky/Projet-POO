@@ -7,6 +7,11 @@
 using namespace std;
 
 
+size_t Vecteur::size() const
+{
+	return coords.size();
+}
+
 void Vecteur::augmente(double x)
 {
 	coords.push_back(x);
