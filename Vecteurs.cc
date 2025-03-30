@@ -216,27 +216,28 @@ Vecteur operator^(Vecteur v1, Vecteur const& v2)
 
 }
 
+ostream& Vecteur::afficher(ostream& out) const
+{
+	if(this->size()==0) 
+	{
+		out<<"Ce vecteur est vide";
+	}
+	else
+	{
+		for(auto element : coords)
+		{
+			out<<element<<" ";
+		}
+	}
+	return out;
+} 
+
 
 
 ostream& operator<<(ostream& out, Vecteur const& v)
 {
-	vector<double> u = v.get_coords(); //u est un placeholder pour l'attribut prive "v.coords"
-	
-	if(u.size()==0) 
-	{
-		out<<"Ce vecteur est vide";
-		return out;
-	}
-	else
-	{
-		out<<"( ";
-		for(size_t i(0) ; i<u.size()-1 ; ++i) //u.size()-1 pour eviter une virgule en trop a la fin
-		{
-			out<<u[i]<<", ";
-		}
-		out<<u[u.size()-1]<<" )";
-		return out;
-	}
+	v.afficher(out);
+	return out;
 } 
 
 

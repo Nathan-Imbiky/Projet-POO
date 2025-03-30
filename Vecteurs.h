@@ -16,6 +16,7 @@ class Vecteur
 	
 	double norme() const; // calcule la norme
 	size_t size() const; // retourne la taille de coords
+	std::ostream& afficher(std::ostream& out) const; //fonction d'affichage utile pour l'opérateur <<; affiche les coordonnées les une après les autres
 	
 	//produits :
 	double prod_scal(Vecteur autre) const; // produit scalaire de vecteurs; si les dimensions ne sont pas egales on lance une exception 
