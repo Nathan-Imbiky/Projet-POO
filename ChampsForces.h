@@ -4,10 +4,11 @@
 #include "ObjetPhysique.h"
 #include <iostream>
 
+class ObjetPhysique;
+
 class ChampForces 
-{
-public:
-         
-     virtual Vecteur force(const ObjetPhysique& p, double t) const = 0;
+{	
+	public:     
+     virtual Vecteur force(const ObjetPhysique& PM, double temps) const = 0;
      virtual ~ChampForces() = default;
 };

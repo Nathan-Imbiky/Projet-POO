@@ -13,42 +13,33 @@ public:
      GravitationConstante()
      : gravitation (g)
      {}
-     GravitationConstante( Vecteur Gravitation)
+     GravitationConstante(Vecteur Gravitation)
      : gravitation(Gravitation)
      {}
-	Vecteur force(const PointMateriel& p, double temps ) const;
-	Vecteur getGr() const{return gravitation;}
+	Vecteur force(const ObjetPhysique& PM, double temps ) const override;
+	Vecteur getGr() const {return gravitation;}
 	void setGr ( Vecteur Gr){gravitation=Gr ;}
 private:
 	Vecteur gravitation;
 };
 
-std::ostream& operator<<(std::ostream& out, PointMateriel const& pnt);
 
 class PointMateriel: public ObjetPhysique
 {
 public:
-     PointMateriel()
-     : VecteurPosition(0, 0, 0),VecteurVitesse (0,0,0), G(g), masse(0)
+     PointMateriel(Vecteur P={0, 0, 0}, Vecteur V={0, 0, 0}, double m=0, ChampForces* Gr=new GravitationConstante())
+     : ObjetPhysique(P, V, m, Gr)
      {}
-     PointMateriel( Vecteur P, Vecteur V , GravitationConstante Gr,double m)
-     : VecteurPosition(P), VecteurVitesse (V), G(Gr), masse(m) 
-     {}
-     Vecteur position() const;
-     Vecteur vitesse() const;
-     Vecteur evolution(double t);
-     Vecteur getPosition () const {return VecteurPosition;}
-     void setPosition (Vecteur VP) {VecteurPosition = VP;}
-     Vecteur getVitesse () const {return VecteurVitesse;}
-     void setVitesse (Vecteur VV) {VecteurVitesse = VV;}
-     double getMasse() const {return masse;}
-     void setMasse(double M){masse=M;}
+     ~PointMateriel()
+     {
+		delete champ;
+		champ = nullptr;
+	 }
+	 
+	 Vecteur evolution(double t) const override;
+	 
+	 std::ostream& afficher(std::ostream& out) const override;
     
-private:
-     Vecteur VecteurPosition;
-     Vecteur VecteurVitesse;
-     GravitationConstante G;
-     double masse;	
 };
 
 

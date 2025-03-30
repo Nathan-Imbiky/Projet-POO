@@ -21,9 +21,9 @@ class ObjetMobile
 	void set_coord_derivee(std::size_t n, double x); //la n-ieme coordonnee de la derivee est modifiee en x
 	
 	virtual Vecteur evolution(double t) const = 0; //retourne l'equation d'evolution de l'objet mobile (qui depend donc de quel sous classe il fait partie)
-	virtual void afficher(std::ostream& out) const = 0; //affiche l'objet (depend encore de la sous classe), utile pour l'operateur <<
+	virtual std::ostream& afficher(std::ostream& out) const = 0; //affiche l'objet (depend encore de la sous classe), utile pour l'operateur <<
 };
 
-std::ostream& operator<<(std::ostream& out, ObjetMobile const& o); //operateur << surcharge pour les objets mobiles
+std::ostream& operator<<(std::ostream& out, const ObjetMobile& o); //operateur << surcharge pour les objets mobiles
 
 

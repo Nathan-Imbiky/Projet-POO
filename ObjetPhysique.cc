@@ -7,7 +7,7 @@ using namespace std;
 
 Vecteur ObjetPhysique :: force(double t) const
 {
-	return Vecteur(0);
+	return champ->force(*this, t);
 }
 
     

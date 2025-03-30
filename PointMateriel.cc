@@ -3,38 +3,38 @@
 #include "Vecteurs.h"
 using namespace std;
 
-Vecteur PointMateriel :: position() const
-{
-	return VecteurPosition;
-};
 
-Vecteur PointMateriel :: vitesse() const
+Vecteur GravitationConstante :: force(const ObjetPhysique& PM, double temps ) const
 {
-	return VecteurVitesse;
-};
-
-Vecteur GravitationConstante :: force(const PointMateriel& PM, double temps ) const
-{
-	if(PM.getMasse()==0)
+	if(PM.get_masse()==0)
 	{
-		cout<<"masse nulle le calul ne peut être effectue"<<endl;
+		cout<<"masse nulle le calul ne peut etre effectue"<<endl; //commentaire ?
+		return gravitation;
 	}else{
-		return PM.getMasse()*gravitation;
+		return PM.get_masse()*gravitation;
 	}
 
-};
+}
 
-Vecteur PointMateriel :: evolution(double t)
+Vecteur PointMateriel :: evolution(double t) const
 {
-	return G.getGr()/masse;
-};
+	return champ->force(*this, t)/masse;
+}
 
+/*
 ostream& operator<<(ostream& out, PointMateriel const& pnt)
 {
-	out << pnt.getMasse() << " # masse" << endl;
-    out << pnt.getPosition() << " # position" << endl;
-    out << pnt.getVitesse() << " # vitesse" << endl;
+	pnt.afficher(out);
     return out;
-};
+}
+*/
 
+
+ostream& PointMateriel::afficher(ostream& out) const
+{
+	out << masse << " # masse" << endl;
+    out << etat << " # position" << endl;
+    out << derivee << " # vitesse" << endl;
+    return out;
+}
 

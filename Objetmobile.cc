@@ -23,7 +23,7 @@ ObjetMobile::ObjetMobile(Vecteur v1, Vecteur v2)
 		}
 	}
 
-ostream& operator<<(ostream& out, ObjetMobile const& o)
+ostream& operator<<(ostream& out, const ObjetMobile& o)
 {
 	o.afficher(out);
 	return out;
