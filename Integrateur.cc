@@ -20,4 +20,11 @@ void IntegrateurEulerCromer::integre(ObjetMobile& O, double t, double dt, double
 	}
 }
 
+void Integrateur::repete_integre(unsigned int n, ObjetMobile& O, double t, double dt, double ordre) const
+{
+	for(unsigned int i(1); i<=n; ++i)
+	{
+		integre(O, t, dt, ordre);
+	}
+}
 

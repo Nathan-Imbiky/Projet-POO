@@ -1,4 +1,4 @@
-all: testVecteurs testvecteurs2 testPointMateriel testIntegrateur1
+all: testVecteurs testvecteurs2 testPointMateriel testIntegrateur1 testpomme testpomme2
 
 CXX = g++
 CC = $(CXX)
@@ -28,3 +28,9 @@ ChampsForces.o: Vecteurs.o Constantes.o ObjetPhysique.o ChampsForces.h ChampsFor
 
 testIntegrateur1: Objetmobile.o Constantes.o PointMateriel.o Vecteurs.o Integrateur.o Contraintes.o testIntegrateur1.o
 testIntegrateur1.o: Objetmobile.o Constantes.o PointMateriel.o Vecteurs.o Integrateur.o Contraintes.o testIntegrateur1.cc
+
+testpomme: Objetmobile.o Constantes.o Vecteurs.o ObjetPhysique.o ChampsForces.o PointMateriel.o Integrateur.o testpomme.o
+testpomme.o: Vecteurs.o ObjetPhysique.o ChampsForces.o PointMateriel.o Integrateur.o testpomme.cc
+
+testpomme2: Objetmobile.o Constantes.o Vecteurs.o ObjetPhysique.o ChampsForces.o PointMateriel.o Integrateur.o testpomme2.o
+testpomme2.o: Vecteurs.o ObjetPhysique.o ChampsForces.o PointMateriel.o Integrateur.o testpomme2.cc

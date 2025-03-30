@@ -30,6 +30,7 @@ public:
      
      double get_masse() const {return masse;} 
      void set_masse(double M) {masse=M;}
+     void set_champ(ChampForces* ptr) {champ = ptr;}
      
 protected:
      size_t dimension;

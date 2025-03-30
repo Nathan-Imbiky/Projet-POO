@@ -27,7 +27,7 @@ private:
 class PointMateriel: public ObjetPhysique
 {
 public:
-     PointMateriel(Vecteur P={0, 0, 0}, Vecteur V={0, 0, 0}, double m=0, ChampForces* Gr=new GravitationConstante())
+     PointMateriel(Vecteur P={0, 0, 0}, Vecteur V={0, 0, 0}, double m=0, ChampForces* Gr=new ForceNulle())
      : ObjetPhysique(P, V, m, Gr)
      {}
      ~PointMateriel()
