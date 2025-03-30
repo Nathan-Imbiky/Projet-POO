@@ -1,29 +1,28 @@
-#pragma once 
-#include "Vecteurs.h"
+ #include "Vecteurs.h"
 #include "Constantes.h"
 #include "Contraintes.h"
 #include "ObjetPhysique.h"
 #include <iostream>
 
 
-Vecteur Libre :: applique_force()
+Vecteur Libre :: applique_force(const ObjetPhysique& ob, Vecteur force, double t)
 {
-     if(masse==0)
+     if(ob.get_masse()==0)
      {
           return force;
      }else{
-          return force/masse;
+          return force/ob.get_masse();
      }
 
-};
+}
 
 Vecteur Libre :: position( const ObjetPhysique& Ob)
 {
-     return Ob.etat(*this);
-};
+     return Ob.get_etat();
+}
 
 Vecteur Libre :: vitesse( const ObjetPhysique& Ob)
 {
-     return Ob.derivee(*this);
+     return Ob.get_derivee();
 
-};
+}
