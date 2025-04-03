@@ -4,13 +4,17 @@
 #include "Contraintes.h"
 #include "Constantes.h"
 #include "Objetmobile.h"
+#include "ChampsForces.h"
+#include "ObjetPhysique.h"
 #include <iostream>
 #include <fstream>
 using namespace std;
 
 int main()
 {
-	PointMateriel p({0, 0, 1}, {0, 1, 2}, 0.127);
+	GravitationConstante gr(g);
+	Libre cl;
+	PointMateriel p({0, 0, 1}, {0, 1, 2}, 0.127, gr, cl);
 	IntegrateurEulerCromer I;
 	double t(0);
 	double dt(0.01);
@@ -39,7 +43,7 @@ int main()
 	
 	out.open("test2.txt");
 	
-	PointMateriel p2({1, 0, 5}, {0, 0, 0}, 10);
+	PointMateriel p2({1, 0, 5}, {0, 0, 0}, 10, gr, cl);
 	IntegrateurEulerCromer I2;
 	double t2(0);
 	double dt2(0.5);
@@ -66,7 +70,7 @@ int main()
 	
 	out.open("test3.txt");
 	
-	PointMateriel p3({5, 0, 1}, {0, 0, 30}, 1);
+	PointMateriel p3({5, 0, 1}, {0, 0, 30}, 1, gr, cl);
 	IntegrateurEulerCromer I3;
 	double t3(0);
 	double dt3(0.1);

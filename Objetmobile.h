@@ -10,7 +10,10 @@ class ObjetMobile
 	
 	public :
 	ObjetMobile(Vecteur v1, Vecteur v2={0, 0, 0}); //Constructeur prenant un vecteur pour chaque argument; ajoute des 0 … la fin du vecteur de dimension plus petite si besoin
+	ObjetMobile(ObjetMobile const& O) = default;
 	
+	virtual ~ObjetMobile() = default;
+	virtual ObjetMobile& operator=(const ObjetMobile& O) = default;
 	
 	Vecteur get_etat() const;
 	void set_etat(Vecteur const& v); //remplace le vecteur d'etat par le vecteur v en argument

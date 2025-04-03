@@ -4,21 +4,22 @@
 #include "ObjetPhysique.h"
 #include "ChampsForces.h"
 #include "PointMateriel.h"
+#include "Contraintes.h"
 #include <iostream>
 using namespace std;
 
 int main()
 {
 	GravitationConstante ChampGravitation;
-	ChampForces* ptr(&ChampGravitation);
-	ChampForces* ptr2(new GravitationConstante(g));
+	Libre cl;
+	GravitationConstante gr(g);
 	
 	cout<<"Nous avons :"<<endl;
 	cout<<"un champ de force :"<< ChampGravitation.getGr()<<endl;
 	cout<<endl;
 	
-	PointMateriel M1({1.0, 2.0, 3.0}, {0, 0.1, 0.2}, 0.1, ptr);
-	PointMateriel M2({-1.1, 1.2, 1.8}, {0.2, 0.1, 5}, 0, ptr2);
+	PointMateriel M1({1.0, 2.0, 3.0}, {0, 0.1, 0.2}, 0.1, ChampGravitation, cl);
+	PointMateriel M2({-1.1, 1.2, 1.8}, {0.2, 0.1, 5}, 0, gr, cl);
 	
 	M1.set_masse(0.1);
 	M1.set_etat(Vecteur(1,2,3));

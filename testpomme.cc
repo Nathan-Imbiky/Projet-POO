@@ -3,6 +3,7 @@
 #include "ChampsForces.h"
 #include "PointMateriel.h"
 #include "Integrateur.h"
+#include "Contraintes.h"
 #include <iostream>
 #include <cmath>
 #include <fstream>
@@ -14,8 +15,10 @@ int main()
 	double t(0);
 	PointMateriel terre({0.0, 0.0, -6371000}, {0.0, 0.0, 0.0}, 5.972*pow(10, 24)); //hauteur negative pour la distance a la Terre 
 	
-	ChampForces* Poids(new ChampNewtonien(terre));
-	PointMateriel pomme({0.0, 0.0, 10.0}, {0.0, 0.0, 0}, 0.1, Poids);
+	ChampNewtonien Poids(terre);
+	Libre cl;
+	
+	PointMateriel pomme({0.0, 0.0, 10.0}, {0.0, 0.0, 0}, 0.1, Poids, cl);
 	
 
 	
