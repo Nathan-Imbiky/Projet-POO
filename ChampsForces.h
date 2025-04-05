@@ -4,6 +4,7 @@
 #include "ObjetPhysique.h"
 #include <iostream>
 #include <memory>
+#include <string>
 
 class ObjetPhysique;
 
@@ -13,6 +14,7 @@ class ChampForces
      virtual Vecteur force(const ObjetPhysique& PM, double temps) const = 0;
      virtual ~ChampForces() = default;
      virtual std::unique_ptr<ChampForces> copie() const=0;
+     virtual std::ostream& afficher(std::ostream& out) const=0;
 };
 
 class ForceCentrale: public ChampForces //classe generalisant les forces de type central (gravitation, force de coulomb, etc)
@@ -25,6 +27,7 @@ class ForceCentrale: public ChampForces //classe generalisant les forces de type
 	ForceCentrale(ObjetPhysique& ob)
 	: centre(ob)
 	{}
+	std::ostream& afficher(std::ostream& out) const override;
 };
 
 class ChampNewtonien : public ForceCentrale
@@ -45,4 +48,9 @@ class ForceNulle : public ChampForces
 	Vecteur force(const ObjetPhysique& PM, double temps) const override;
 	std::unique_ptr<ChampForces> copie() const override {return clonage();}
 	std::unique_ptr<ForceNulle> clonage() const {return std::unique_ptr<ForceNulle>(new ForceNulle(*this));}
+	std::ostream& afficher(std::ostream& out) const 
+	{
+		out<<"force nulle";
+		return out;
+	}
 };

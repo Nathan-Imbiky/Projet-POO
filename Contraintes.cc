@@ -3,6 +3,7 @@
 #include "Contraintes.h"
 #include "ObjetPhysique.h"
 #include <iostream>
+#include <string>
 using namespace std;
 
 

@@ -1,6 +1,7 @@
 #pragma once
 #include "Vecteurs.h"
 #include <iostream>
+#include <string>
 
 class ObjetMobile
 {
@@ -25,8 +26,9 @@ class ObjetMobile
 	
 	virtual Vecteur evolution(double t) const = 0; //retourne l'equation d'evolution de l'objet mobile (qui depend donc de quel sous classe il fait partie)
 	virtual std::ostream& afficher(std::ostream& out) const = 0; //affiche l'objet (depend encore de la sous classe), utile pour l'operateur <<
+	virtual std::string nom_type() const = 0; //retourne le type d'une instance sous forme de string (Point Materiel pour un PointMateriel par exemple)
 };
 
-std::ostream& operator<<(std::ostream& out, const ObjetMobile& o); //operateur << surcharge pour les objets mobiles
+std::ostream& operator<<(std::ostream& out, ObjetMobile const& o); //operateur << surcharge pour les objets mobiles
 
 

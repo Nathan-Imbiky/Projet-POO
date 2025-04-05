@@ -2,6 +2,7 @@
 #include "Constantes.h"
 #include "ObjetPhysique.h"
 #include <iostream>
+using namespace std;
 
 
 Vecteur ForceCentrale::quadratique_inverse(ObjetPhysique const& ob) const
@@ -27,4 +28,10 @@ Vecteur ChampNewtonien::force(const ObjetPhysique& PM, double temps) const
 Vecteur ForceNulle::force(const ObjetPhysique& PM, double temps) const
 {
 	return 0*PM.get_etat();
+}
+
+ostream& ForceCentrale::afficher(ostream& out) const
+{
+	out<<"champ newtonien, centre : "<<centre.get_etat()<<", masse : "<<centre.get_masse();
+	return out;
 }

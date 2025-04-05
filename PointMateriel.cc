@@ -1,4 +1,5 @@
 #include <iostream>
+#include <string>
 #include "PointMateriel.h"
 #include "Vecteurs.h"
 using namespace std;
@@ -35,6 +36,8 @@ ostream& PointMateriel::afficher(ostream& out) const
 	out << masse << " # masse" << endl;
     out << etat << " # position" << endl;
     out << derivee << " # vitesse" << endl;
+    out<<position()<<" # position physique"<<endl;
+    out<<vitesse()<<" # vitesse physique"<<endl;
     return out;
 }
 

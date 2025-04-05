@@ -1,7 +1,7 @@
 #pragma once 
+#include "Contraintes.h"
 #include "Vecteurs.h"
 #include "Constantes.h"
-#include "Contraintes.h"
 #include "Objetmobile.h"
 #include "ChampsForces.h"
 #include <iostream>
@@ -23,13 +23,8 @@ public:
 		set_contraintes(Ctr);
 		dimension = v1.size();
 	}
-	ObjetPhysique(Vecteur v1={0, 0, 0}, Vecteur v2={0, 0, 0}, double m=0)
-	: ObjetMobile(v1, v2), masse(m)
-	{
-		dimension = v1.size();
-		champ=std::unique_ptr<ChampForces>(new ForceNulle);
-		contraintes=std::unique_ptr<Contrainte>(new Libre);
-	}
+	ObjetPhysique(Vecteur v1={0, 0, 0}, Vecteur v2={0, 0, 0}, double m=0);
+	
 	ObjetPhysique(ObjetPhysique const& O)
 	: ObjetMobile(O)
 	{
@@ -58,6 +53,7 @@ public:
      void set_champ(ChampForces const& C) { champ = C.copie();}
      void set_contraintes(Contrainte const& ctr);
      
+     virtual std::unique_ptr<ObjetPhysique> copie() const=0;
      
 protected:
      size_t dimension;

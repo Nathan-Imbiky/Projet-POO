@@ -22,6 +22,13 @@ public:
 	void setGr ( Vecteur Gr){gravitation=Gr ;}
 	std::unique_ptr<ChampForces> copie() const override {return clonage();}
 	std::unique_ptr<GravitationConstante> clonage() const {return std::unique_ptr<GravitationConstante>(new GravitationConstante(*this));}
+	std::ostream& afficher(std::ostream& out) const override
+	{
+		out<<"gravitation constante, acceleration : "<<gravitation;
+		return out;
+	}
+	
+	
 private:
 	Vecteur gravitation;
 };
@@ -43,6 +50,10 @@ public:
 	 Vecteur evolution(double t) const override;
 	 
 	 std::ostream& afficher(std::ostream& out) const override;
+	 
+	 std::unique_ptr<ObjetPhysique> copie() const override {return clonage();}
+	 std::unique_ptr<PointMateriel> clonage() const { return std::unique_ptr<PointMateriel>(new PointMateriel(*this));}
+	 std::string nom_type() const override {return "Point Materiel";}
     
 };
 

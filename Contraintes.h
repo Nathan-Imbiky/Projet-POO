@@ -4,6 +4,7 @@
 #include "ObjetPhysique.h"
 #include <iostream>
 #include <memory>
+#include <string>
 
 class ObjetPhysique;
 
@@ -14,6 +15,7 @@ public:
      virtual Vecteur position(const ObjetPhysique& ob) const =0;
      virtual Vecteur vitesse(const ObjetPhysique& ob) const =0;
      virtual std::unique_ptr<Contrainte> copie() const=0;
+     virtual std::string nom_type() const = 0;
 };
 
 
@@ -25,5 +27,6 @@ public:
      Vecteur vitesse(const ObjetPhysique& Ob) const override;
      std::unique_ptr<Contrainte> copie() const override;
      std::unique_ptr<Libre> clonage() const;
+     std::string nom_type() const override {return "Libre";}
 };
 

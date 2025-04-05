@@ -1,4 +1,4 @@
-all: testVecteurs testvecteurs2 testPointMateriel testIntegrateur1 testpomme testpomme2
+all: testVecteurs testvecteurs2 testPointMateriel testIntegrateur1 testpomme testpomme2 testSystem
 
 CXX = g++
 CC = $(CXX)
@@ -13,8 +13,7 @@ testVecteurs.o: testVecteurs.cc Vecteurs.h
 testVecteurs: Vecteurs.o testVecteurs.o
 
 
-testPointMateriel: Vecteurs.o Constantes.o ObjetPhysique.o ChampsForces.o PointMateriel.o Objetmobile.o ObjetPhysique.o testPointMateriel.o
-
+testPointMateriel: Vecteurs.o Constantes.o ObjetPhysique.o ChampsForces.o Contraintes.o PointMateriel.o Objetmobile.o ObjetPhysique.o testPointMateriel.o
 testPointMateriel.o: PointMateriel.cc PointMateriel.h  
 Constantes.o: Constantes.h Constantes.cc Vecteurs.o
 
@@ -26,11 +25,16 @@ ObjetPhysique.o: Vecteurs.o Constantes.o Contraintes.o Objetmobile.o ChampsForce
 PointMateriel.o: Vecteurs.o Constantes.o ObjetPhysique.o ChampsForces.o PointMateriel.h PointMateriel.cc
 ChampsForces.o: Vecteurs.o Constantes.o ObjetPhysique.o ChampsForces.h ChampsForces.cc
 
-testIntegrateur1: Objetmobile.o Constantes.o PointMateriel.o Vecteurs.o Integrateur.o Contraintes.o testIntegrateur1.o
+testIntegrateur1: Objetmobile.o ObjetPhysique.o Constantes.o PointMateriel.o Vecteurs.o Integrateur.o Contraintes.o ChampsForces.o testIntegrateur1.o
 testIntegrateur1.o: Objetmobile.o Constantes.o PointMateriel.o Vecteurs.o Integrateur.o Contraintes.o testIntegrateur1.cc
 
-testpomme: Objetmobile.o Constantes.o Vecteurs.o ObjetPhysique.o ChampsForces.o PointMateriel.o Integrateur.o testpomme.o
+testpomme: Objetmobile.o Contraintes.o Constantes.o Vecteurs.o ObjetPhysique.o ChampsForces.o PointMateriel.o Integrateur.o testpomme.o
 testpomme.o: Vecteurs.o ObjetPhysique.o ChampsForces.o PointMateriel.o Integrateur.o testpomme.cc
 
-testpomme2: Objetmobile.o Constantes.o Vecteurs.o ObjetPhysique.o ChampsForces.o PointMateriel.o Integrateur.o testpomme2.o
+testpomme2: Objetmobile.o Contraintes.o Constantes.o Vecteurs.o ObjetPhysique.o ChampsForces.o PointMateriel.o Integrateur.o testpomme2.o
 testpomme2.o: Vecteurs.o ObjetPhysique.o ChampsForces.o PointMateriel.o Integrateur.o testpomme2.cc
+
+Systemes.o: ObjetPhysique.o Systemes.o Integrateur.o Contraintes.o ChampsForces.o Systemes.cc Systemes.h
+
+testSystem: Systemes.o Integrateur.o Contraintes.o ChampsForces.o PointMateriel.o Vecteurs.o Objetmobile.o ObjetPhysique.o Constantes.o testSystem.o
+testSystem.o: Systemes.o Integrateur.o Contraintes.o ChampsForces.o PointMateriel.o Vecteurs.o testSystem.cc
