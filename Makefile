@@ -1,4 +1,4 @@
-all: testVecteurs testvecteurs2 testPointMateriel testIntegrateur1 testpomme testpomme2 testSystem
+all: testVecteurs testvecteurs2 testPointMateriel testIntegrateur1 testpomme testpomme2 testSystem exerciceP9
 
 CXX = g++
 CC = $(CXX)
@@ -38,3 +38,6 @@ Systemes.o: ObjetPhysique.o Systemes.o Integrateur.o Contraintes.o ChampsForces.
 
 testSystem: Systemes.o Integrateur.o Contraintes.o ChampsForces.o PointMateriel.o Vecteurs.o Objetmobile.o ObjetPhysique.o Constantes.o testSystem.o
 testSystem.o: Systemes.o Integrateur.o Contraintes.o ChampsForces.o PointMateriel.o Vecteurs.o testSystem.cc
+
+exerciceP9: Objetmobile.o Contraintes.o Constantes.o Vecteurs.o ObjetPhysique.o ChampsForces.o PointMateriel.o Integrateur.o Systemes.o exerciceP9.o
+exerciceP9.o: Vecteurs.o ObjetPhysique.o ChampsForces.o PointMateriel.o Integrateur.o Systemes.o exerciceP9.cc

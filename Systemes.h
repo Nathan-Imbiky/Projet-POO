@@ -17,8 +17,8 @@ class Systeme
 	
 	
 	public:
-	Systeme()
-	: temps(0), integrateur(new IntegrateurEulerCromer)
+	Systeme(double t=0)
+	: temps(t), integrateur(new IntegrateurEulerCromer)
 	{}
 	Systeme(ObjetPhysique const& O, ChampForces const& F, Contrainte const& Ctr, Integrateur const& I, double t=0)
 	: temps(t)
@@ -80,8 +80,11 @@ class Systeme
 	
 	void set_contrainte_objet(size_t i, size_t j);
 	void set_champ_objet(size_t i, size_t j);
+	void set_temps(double t) {temps = t;}
 	
 	std::ostream& afficher(std::ostream& out) const;
+	void evolue(double dt, unsigned int n=1);
+	std::unique_ptr<ObjetPhysique>& get_objet(size_t i) {return objets[i];}
 };
 
 std::ostream& operator<<(std::ostream& out, Systeme const& S);

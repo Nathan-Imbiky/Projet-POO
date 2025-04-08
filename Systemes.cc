@@ -76,3 +76,20 @@ ostream& operator<<(ostream& out, Systeme const& S)
 	S.afficher(out);
 	return out;
 }
+
+
+void Systeme::evolue(double dt, unsigned int n)
+{
+	double t(0);
+	for(unsigned int i(1); i<=n; ++i)
+	{
+		t = temps;
+		for(auto& ob : objets)
+		{
+			integrateur->integre(*ob, t, dt);
+			t+=dt;
+		}	
+	}
+	temps+=n*dt;
+	
+}
